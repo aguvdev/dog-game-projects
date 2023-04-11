@@ -11,30 +11,30 @@ let gameFrame = 0;
 
 class Enemy {
   constructor(){
-    this.image = new Image();
-    this.image.src = 'enemy1.png'
-    //this.speed = Math.random() * 4 - 2;
-    this.spriteWidth = 293;
-    this.spriteHeight = 155;
-    this.width = this.spriteWidth / 2.5;
-    this.height = this.spriteHeight / 2.5;
-    this.x = Math.random() * (canvas.width - this.width);
-    this.y = Math.random() * (canvas.height - this.height);
-    this.frame = 0;
-    this.flapSpeed = Math.floor(Math.random() * 3 + 1);
+    this.image = new Image(); // Creación de una nueva imagen
+    this.image.src = 'enemy1.png'; // Ruta de la imagen
+    this.spriteWidth = 293; // Ancho de los sprites de la imagen
+    this.spriteHeight = 155; // Alto de los sprites de la imagen
+    this.width = this.spriteWidth / 2.5; // Ancho del enemigo
+    this.height = this.spriteHeight / 2.5; // Alto del enemigo
+    this.x = Math.random() * (canvas.width - this.width); // Posición en x aleatoria dentro del canvas
+    this.y = Math.random() * (canvas.height - this.height); // Posición en y aleatoria dentro del canvas
+    this.frame = 0; // Número de frame actual
+    this.flapSpeed = Math.floor(Math.random() * 3 + 1); // Velocidad de animación
   }
   update(){
-    this.x += Math.random() * 3 - 1.5;
-    this.y += Math.random() * 3 - 1.5;
+    this.x += Math.random() * 3 - 1.5; // Movimiento aleatorio en x
+    this.y += Math.random() * 3 - 1.5; // Movimiento aleatorio en y
     // animate sprites
-    if (gameFrame % this.flapSpeed === 0){
-      this.frame > 4 ? this.frame = 0 : this.frame++;
+    if (gameFrame % this.flapSpeed === 0){ // Si el número de frame actual es múltiplo de la velocidad de animación
+      this.frame > 4 ? this.frame = 0 : this.frame++; // Si ya se llegó al último frame, volver al primero
     };
   }
   draw(){
-    ctx.drawImage(this.image, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height); // Dibujo del enemigo en el canvas
   }
 }
+
 
 for (let i = 0; i < numberOfEnemies; i++) {
   enemiesArray.push(new Enemy());
