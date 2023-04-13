@@ -9,48 +9,53 @@ const numberOfEnemies = 10;
 const enemiesArray = [];
 let gameFrame = 0;
 
+// Definimos la clase Enemy
 class Enemy {
   constructor() {
-    // Cargar imagen del enemigo
+    // Cargamos la imagen del enemigo
     this.image = new Image();
     this.image.src = "enemy3.png";
-    // Velocidad aleatoria del enemigo
+    // Definimos la velocidad del enemigo de forma aleatoria
     this.speed = Math.random() * 4 + 1;
-    // Tamaño de la imagen de sprite
+    // Definimos las dimensiones del sprite del enemigo
     this.spriteWidth = 218;
     this.spriteHeight = 177;
-    // Tamaño del enemigo
+    // Definimos las dimensiones del enemigo
     this.width = this.spriteWidth / 2;
     this.height = this.spriteHeight / 2;
-    // Posición inicial aleatoria del enemigo en la pantalla
+    // Definimos la posición del enemigo de forma aleatoria dentro del canvas
     this.x = Math.random() * (canvas.width - this.width);
     this.y = Math.random() * (canvas.height - this.height);
-    // Frame actual del sprite del enemigo
+    // Definimos el frame inicial del sprite del enemigo y su velocidad de animación
     this.frame = 0;
-    // Velocidad de animación del sprite
     this.flapSpeed = Math.floor(Math.random() * 3 + 1);
-    // Ángulo actual del enemigo
+    // Definimos el ángulo inicial del enemigo y su velocidad de rotación
     this.angle = Math.random() * 500;
-    // Velocidad de rotación del enemigo
     this.angleSpeed = Math.random() * 0.5 + 0.5;
-    // Curva de movimiento del enemigo
-    //this.curve = Math.random() * 200 + 50;
   }
+
+  // Actualizamos la posición del enemigo y su animación
   update() {
-    this.x = canvas.width/2 * Math.cos(this.angle * Math.PI/90) + (canvas.width/2 - this.width/2);
-    this.y = canvas.height/2 * Math.sin(this.angle * Math.PI/90) + (canvas.height/2 - this.height/2);;
-    // Ajustar el ángulo del enemigo
+    // Actualizamos la posición del enemigo en función de su ángulo y su velocidad
+    this.x =
+      (canvas.width / 2) * Math.cos((this.angle * Math.PI) / 90) +
+      (canvas.width / 2 - this.width / 2);
+    this.y =
+      (canvas.height / 2) * Math.sin((this.angle * Math.PI) / 90) +
+      (canvas.height / 2 - this.height / 2);
+    // Actualizamos el ángulo del enemigo en función de su velocidad
     this.angle += this.angleSpeed;
-    // Si el enemigo sale de la pantalla, volverlo a colocar en el lado derecho
+    // Si el enemigo sale del canvas por la izquierda, lo colocamos en la derecha
     if (this.x + this.width < 0) this.x = canvas.width;
-    // Animar el sprite del enemigo
+    // Actualizamos el frame del sprite del enemigo cada cierto número de frames
     if (gameFrame % this.flapSpeed === 0) {
-      // Cambiar al siguiente frame del sprite
       this.frame > 4 ? (this.frame = 0) : this.frame++;
     }
   }
+
+  // Dibujamos al enemigo en el canvas
   draw() {
-    // Dibujar el sprite del enemigo en la posición actual
+    // Dibujamos el sprite del enemigo en su posición actual
     ctx.drawImage(
       this.image,
       this.frame * this.spriteWidth,
