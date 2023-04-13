@@ -5,7 +5,7 @@ const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
 CANVAS_WIDTH = canvas.width = 500;
 CANVAS_HEIGHT = canvas.height = 1000;
-const numberOfEnemies = 1000;
+const numberOfEnemies = 10;
 const enemiesArray = [];
 let gameFrame = 0;
 
@@ -30,15 +30,15 @@ class Enemy {
     // Velocidad de animación del sprite
     this.flapSpeed = Math.floor(Math.random() * 3 + 1);
     // Ángulo actual del enemigo
-    this.angle = 0;
+    this.angle = Math.random() * 500;
     // Velocidad de rotación del enemigo
-    this.angleSpeed = Math.random() * 1.5 + 0.5;
+    this.angleSpeed = Math.random() * 0.5 + 0.5;
     // Curva de movimiento del enemigo
     //this.curve = Math.random() * 200 + 50;
   }
   update() {
-    this.x = canvas.width/2 * Math.sin(this.angle * Math.PI/180) + (canvas.width/2 - this.width/2);
-    this.y = canvas.height/2 * Math.cos(this.angle * Math.PI/180) + (canvas.height/2 - this.height/2);;
+    this.x = canvas.width/2 * Math.cos(this.angle * Math.PI/90) + (canvas.width/2 - this.width/2);
+    this.y = canvas.height/2 * Math.sin(this.angle * Math.PI/90) + (canvas.height/2 - this.height/2);;
     // Ajustar el ángulo del enemigo
     this.angle += this.angleSpeed;
     // Si el enemigo sale de la pantalla, volverlo a colocar en el lado derecho
